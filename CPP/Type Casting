@@ -1,0 +1,94 @@
+// Write a program that takes the obtained marks as input and calcultae the percentage based on the given marks and a total marks value. Using the percentage, determine the grade according to the following criteria:
+// percentage >= 90 Grade A+
+// percentage >= 80 Grade A
+// percentage >= 70 Grade B
+// percentage >= 60 Grade C
+// percentage >= 50 Grade D
+// percentage < 50 Grade F
+// The program should create a Grade object with the obtained marks and the determined grade. It shoulf then convert the grade object to two basic types: an int for the marks and a string for the grade: int marks = studentGrade;.
+// Finally, the program should display the marks and grades.
+
+#include <iostream>
+
+using namespace std;
+
+class Grade {
+public:
+  int marks;
+  string grade;
+
+  Grade(int marks, string grade) {
+    this->marks = marks;
+    this->grade = grade;
+  }
+
+  int getMarks() { 
+        return marks; 
+    }
+  string getGrade() { 
+        return grade; 
+    }
+};
+
+Grade calculateGrade(int marks, int totalMarks) {
+  float percentage = (float)marks / totalMarks * 100.0f;
+  string grade;
+  if (percentage >= 90.0f) {
+    grade = "A+";
+  } else if (percentage >= 80.0f) {
+    grade = "A";
+  } else if (percentage >= 70.0f) {
+    grade = "B";
+  } else if (percentage >= 60.0f) {
+    grade = "C";
+  } else if (percentage >= 50.0f) {
+    grade = "D";
+  } else {
+    grade = "F";
+  }
+  return Grade(marks, grade);
+}
+
+int convertGradeToInt(string grade) {
+  if (grade == "A+") {
+    return 90;
+  } else if (grade == "A") {
+    return 80;
+  } else if (grade == "B") {
+    return 70;
+  } else if (grade == "C") {
+    return 60;
+  } else if (grade == "D") {
+    return 50;
+  } else {
+    return 0;
+  }
+}
+
+string convertGradeToString(string grade) {
+  return grade;
+}
+
+void displayGrade(Grade grade) {
+  cout << "Marks: " << grade.getMarks() << endl;
+  cout << "Grade: " << grade.getGrade() << endl;
+}
+
+int main() {
+  int totalMarks = 100;
+  int marks;
+  cout << "Enter the obtained marks: ";
+  cin >> marks;
+
+  Grade grade = calculateGrade(marks, totalMarks);
+
+  displayGrade(grade);
+
+  int marksInt = convertGradeToInt(grade.getGrade());
+  string gradeString = convertGradeToString(grade.getGrade());
+
+  cout << "Marks (int): " << marksInt << endl;
+  cout << "Grade (string): " << gradeString << endl;
+
+  return 0;
+}
